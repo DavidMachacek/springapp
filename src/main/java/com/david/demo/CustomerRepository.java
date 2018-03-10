@@ -2,6 +2,7 @@ package com.david.demo;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
@@ -11,4 +12,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     List<Customer> findByLastNameOrderByAgeAsc(String lastName);
 
     List<Customer> findByLastNameOrderByAgeDesc(String lastName);
+
+    void deleteByLastName(String lastName);
 }
