@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.customer;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface CustomerService {
     List<Customer> getByAgeDesc(String lastName);
     List<Customer> getByAgeAsc(String lastName);
     void deleteByLastName(String lastName);
-
+    List<Customer> getGroup(String groupName);
 }

@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.customer;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.david.demo.LogThis;
 
 @RestController
 public class CustomerController {
@@ -33,6 +35,13 @@ public class CustomerController {
     public List<Customer> getCustomersDesc(@PathVariable("lastName")String lastName) {
 
         return service.getByAgeDesc(lastName);
+    }
+
+    @LogThis
+    @GetMapping(value = "/group/{groupName}" )
+    public List<Customer> getGroup(@PathVariable("groupName")String groupName) {
+
+        return service.getGroup(groupName);
     }
 
     @Transactional

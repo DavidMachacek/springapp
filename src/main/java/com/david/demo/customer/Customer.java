@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.customer;
 
 import java.io.Serializable;
 
@@ -16,13 +16,15 @@ public class Customer implements Serializable {
     private String firstName;
     private String lastName;
     private int age;
+    private Long groupId;
 
     protected Customer() {}
 
-    public Customer(String firstName, String lastName, int age) {
+    public Customer(String firstName, String lastName, int age, Long groupId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.groupId = groupId;
     }
 
     public Long getId() {
