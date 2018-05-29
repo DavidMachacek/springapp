@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.logs;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,12 +22,12 @@ public class LoggingService {
         this.hazelcastInstance = hazelcastInstance;
     }
 
-    @Before("@annotation(LogThis)")
+    @Before("@annotation(com.david.demo.logs.LogThis)")
     public void logCacheBefore() {
         logCache("=== BEFORE ASPECT ===");
     }
 
-    @After("@annotation(LogThis)")
+    @After("@annotation(com.david.demo.logs.LogThis)")
     public void logCacheAfter() {
         logCache("=== AFTER ASPECT ===");
     }

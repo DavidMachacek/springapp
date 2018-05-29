@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.cache;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

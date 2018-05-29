@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.david.demo.LogThis;
+import com.david.demo.logs.LogThis;
 
 @RestController
 public class CustomerController {
@@ -24,12 +24,14 @@ public class CustomerController {
 
         return service.getByName(lastName);
     }
+
     @LogThis
     @GetMapping(value = "/customer/{lastName}/asc" )
     public List<Customer> getCustomersAsc(@PathVariable("lastName")String lastName) {
 
         return service.getByAgeAsc(lastName);
     }
+
     @LogThis
     @GetMapping(value = "/customer/{lastName}/desc" )
     public List<Customer> getCustomersDesc(@PathVariable("lastName")String lastName) {

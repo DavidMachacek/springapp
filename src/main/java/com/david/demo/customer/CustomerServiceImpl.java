@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
-import com.david.demo.LogThis;
+import com.david.demo.logs.LogThis;
 
 public class CustomerServiceImpl implements CustomerService {
 

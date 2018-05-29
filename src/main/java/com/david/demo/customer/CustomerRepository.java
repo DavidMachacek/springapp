@@ -14,5 +14,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     List<Customer> findByGroupId(Long groupId);
 
+    List<Customer> findAll();
+
     void deleteByLastName(String lastName);
 }

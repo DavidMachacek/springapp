@@ -2,8 +2,14 @@ package com.david.demo.user;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
 import javax.validation.Valid;
+import javax.validation.Validator;
+import javax.validation.metadata.ConstraintDescriptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -11,14 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,6 +31,9 @@ public class UserController {
 
     @Autowired
     MessageSource messageSource;
+
+    @Autowired
+    Validator validator;
 
     @GetMapping(value = "/user/registration")
     public String showRegistrationForm(Model model) {
@@ -43,15 +48,17 @@ public class UserController {
         model.addAttribute("user", userDto);
         ResourceBundle messages = ResourceBundle.getBundle("messages", Locale.ENGLISH);
         return messages.getString("label.form.title");
-        //return messageSource.getMessage("label.form.title", null, Locale.ENGLISH);
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Valid UserDTO accountDto,
+            @ModelAttribute("user") UserDTO accountDto,
             BindingResult result,
             ModelMap modelMap) {
-
+        Set<ConstraintViolation<UserDTO>> validationResult = validator.validate(accountDto);
+        if (!validationResult.isEmpty()) {
+            throw new ConstraintViolationException(validationResult);
+        }
         System.out.println("INSIDE registerUserAccount POST");
         User registered = new User();
         if (!result.hasErrors()) {
@@ -62,6 +69,70 @@ public class UserController {
         }
         if (result.hasErrors()) {
             System.out.println("has ERRORS");
+
+            result.getAllErrors().stream().forEach(objectError -> {
+                System.out.println(objectError);
+                System.out.println(objectError.getObjectName());
+                System.out.println(objectError.getCode());
+                System.out.println(objectError.getCodes());
+                ConstraintViolation constraintViolation = new ConstraintViolation() {
+                    @Override
+                    public String getMessage() {
+                        return null;
+                    }
+
+                    @Override
+                    public String getMessageTemplate() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getRootBean() {
+                        return null;
+                    }
+
+                    @Override
+                    public Class getRootBeanClass() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getLeafBean() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object[] getExecutableParameters() {
+                        return new Object[0];
+                    }
+
+                    @Override
+                    public Object getExecutableReturnValue() {
+                        return null;
+                    }
+
+                    @Override
+                    public Path getPropertyPath() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getInvalidValue() {
+                        return null;
+                    }
+
+                    @Override
+                    public ConstraintDescriptor<?> getConstraintDescriptor() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object unwrap(Class aClass) {
+                        return null;
+                    }
+                };
+                //throw new ConstraintViolationException(result.getAllErrors());
+            } );
             return new ModelAndView("registration", "user", accountDto);
         }
         else {
