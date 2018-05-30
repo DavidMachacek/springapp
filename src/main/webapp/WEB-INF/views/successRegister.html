@@ -2,12 +2,17 @@
 <body>
 <h1 th:text="#{label.form.title}">form</h1>
 
-<H1> USPECH</H1>
-<p th:text="${user}">user</p>
-<p>Prijmeni: </p>
-<p th:text="${user.lastName}">lastName</p>
-<p>email: </p>
-<p th:text="${user.email}">email</p>
+<H1>Success</H1>
+
+<p>
+<b>LastName: </b>
+<div th:text="${user.lastName}">lastName</div>
+</p>
+
+<p>
+<b>Email: </b>
+<div th:text="${user.email}">email</div>
+</p>
 
 </body>
 </html>

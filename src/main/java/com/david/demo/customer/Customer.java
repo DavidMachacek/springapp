@@ -18,7 +18,7 @@ public class Customer implements Serializable {
     private int age;
     private Long groupId;
 
-    protected Customer() {}
+    public Customer() {}
 
     public Customer(String firstName, String lastName, int age, Long groupId) {
         this.firstName = firstName;
@@ -27,16 +27,74 @@ public class Customer implements Serializable {
         this.groupId = groupId;
     }
 
+    /**
+     * Property getter
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Property setter
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Property getter
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Property setter
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Property getter
+     */
     public String getLastName() {
         return lastName;
+    }
+
+    /**
+     * Property setter
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Property getter
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * Property setter
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * Property getter
+     */
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    /**
+     * Property setter
+     */
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     @Override

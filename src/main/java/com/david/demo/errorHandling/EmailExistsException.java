@@ -1,4 +1,4 @@
-package com.david.demo.user;
+package com.david.demo.errorHandling;
 
 public class EmailExistsException extends Exception {
 

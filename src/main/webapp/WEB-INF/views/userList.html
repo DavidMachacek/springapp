@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User list</title>
+</head>
+
+<body>
+
+<a href="?lang=en">English</a> |
+<a href="?lang=cz">Czech</a>
+
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<h1>Users list</h1>
+<div th:if="${#lists.isEmpty(userList)}">
+    No Users to display
+</div>
+<table th:if="${not #lists.isEmpty(userList)}">
+    <tr>
+        <td/>ID</td>
+        <td/>FIRSTNAME</td>
+        <td/>LASTNAME</td>
+        <td/>EMAIL</td>
+    </tr>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.id}"/></td>
+        <td th:text="${user.firstName}"/></td>
+        <td th:text="${user.lastName}"/></td>
+        <td th:text="${user.email}"/></td>
+    </tr>
+</table>
+</body>
+</html>

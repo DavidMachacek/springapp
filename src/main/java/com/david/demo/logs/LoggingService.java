@@ -14,6 +14,7 @@ import com.hazelcast.monitor.LocalMapStats;
 @Aspect
 @Component
 public class LoggingService {
+
     private static final Logger log = LoggerFactory.getLogger(LoggingService.class);
     private final HazelcastInstance hazelcastInstance;
 
@@ -24,18 +25,18 @@ public class LoggingService {
 
     @Before("@annotation(com.david.demo.logs.LogThis)")
     public void logCacheBefore() {
-        logCache("=== BEFORE ASPECT ===");
+        logCache("=== cache stats BEFORE aspect ===");
     }
 
     @After("@annotation(com.david.demo.logs.LogThis)")
     public void logCacheAfter() {
-        logCache("=== AFTER ASPECT ===");
+        logCache("=== cache stats AFTER aspect ===");
     }
 
     private void logCache(String description) {
         LocalMapStats localMapStats = hazelcastInstance.getMap("customer-cache").getLocalMapStats();
-        System.out.println(description);
-        System.out.println("Backup count: " + localMapStats.getBackupCount());
-        System.out.println("Hits count: " + localMapStats.getHits());
+        log.debug(description);
+        log.debug("Backup count: {}", localMapStats.getBackupCount());
+        log.debug("Hits count: {}", localMapStats.getHits());
     }
 }

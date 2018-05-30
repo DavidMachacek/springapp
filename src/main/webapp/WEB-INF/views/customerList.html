@@ -1,20 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Customer list</title>
 </head>
 <body>
+
+<a href="?lang=en">English</a> |
+<a href="?lang=cz">Czech</a>
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+<h1>Customers list</h1>
+<div th:if="${#lists.isEmpty(customerList)}">
+    No customers to display
+</div>
+
+<table th:if="${not #lists.isEmpty(customerList)}">
+    <tr>
+        <td/>ID</td>
+        <td/>FIRSTNAME</td>
+        <td/>LASTNAME</td>
+        <td/>EMAIL</td>
+    </tr>
+    <tr th:each="customer : ${customerList}">
+        <td th:text="${customer.id}"/></td>
+        <td th:text="${customer.firstName}"/></td>
+        <td th:text="${customer.lastName}"/></td>
+    </tr>
+</table>
+
+<form action="/customer/registration" th:object="${customer}" method="POST" enctype="utf8">
+    <div>
+        <label th:text="#{label.customer.firstName}">firstName</label>
+        <input th:field="*{firstName}"/>
+        <p th:each="error: ${#fields.errors('firstName')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.customer.lastName}">lastName</label>
+        <input th:field="*{lastName}"/>
+        <p th:each="error : ${#fields.errors('lastName')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label th:text="#{label.customer.age}">age</label>
+        <input th:field="*{age}"/>
+        <p th:each="error : ${#fields.errors('age')}"
+           th:text="${error}">Validation error</p>
+    </div>
+    <button type="submit" th:text="#{label.form.submit}">submit</button>
 </form>
+
 </body>
 </html>

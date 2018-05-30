@@ -13,4 +13,6 @@ public interface CustomerService {
     List<Customer> getByAgeAsc(String lastName);
     void deleteByLastName(String lastName);
     List<Customer> getGroup(String groupName);
+    List<Customer> getAll();
+    Customer addNew(Customer newCustomer);
 }

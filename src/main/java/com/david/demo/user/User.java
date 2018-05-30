@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -67,4 +68,5 @@ public class User {
         sb.append('}');
         return sb.toString();
     }
+
 }

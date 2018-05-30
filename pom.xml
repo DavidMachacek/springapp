@@ -7,27 +7,22 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
-<!--
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
-		<relativePath/>
-	</parent>
--->
+
 	<properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<version.spring.starter>2.0.0.RELEASE</version.spring.starter>
 		<version.spring.core>5.0.3.RELEASE</version.spring.core>
 		<version.thymeleaf>3.0.9.RELEASE</version.thymeleaf>
+		<version.h2>1.4.196</version.h2>
+		<version.javax.jsp>2.3.2-b01</version.javax.jsp>
+		<version.javax.jstl>1.2</version.javax.jstl>
+		<version.log4j>1.2.17</version.log4j>
 	</properties>
 
 	<dependencies>
@@ -36,22 +31,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
             <version>${version.spring.starter}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${version.spring.starter}</version>
 		</dependency>
-<!--
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
--->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -62,8 +48,9 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-            <version>1.4.196</version>
+			<version>${version.h2}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -82,41 +69,43 @@
 			<artifactId>spring-webmvc</artifactId>
             <version>${version.spring.core}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.hazelcast/hazelcast-spring -->
+
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast-spring</artifactId>
 			<version>3.9.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.hazelcast/hazelcast -->
 		<dependency>
 			<groupId>com.hazelcast</groupId>
 			<artifactId>hazelcast</artifactId>
 			<version>3.9.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
             <version>${version.spring.core}</version>
 		</dependency>
+
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
             <version>m1</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${version.spring.starter}</version>
         </dependency>
+
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>${version.thymeleaf}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
+
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
@@ -126,17 +115,19 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.2-b01</version>
+			<version>${version.javax.jsp}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${version.javax.jstl}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<version>${version.log4j}</version>
 		</dependency>
 
 
@@ -150,6 +141,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

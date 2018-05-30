@@ -10,40 +10,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.david.demo.logs.LogThis;
 
 @RestController
-public class CustomerController {
+public class CustomerApiController {
 
-    private final CustomerService service;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerService service) {
-        this.service = service;
+    public CustomerApiController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @LogThis
     @GetMapping(value = "/customer/{lastName}" )
     public List<Customer> getCustomers(@PathVariable("lastName")String lastName) {
 
-        return service.getByName(lastName);
+        return customerService.getByName(lastName);
     }
 
     @LogThis
     @GetMapping(value = "/customer/{lastName}/asc" )
     public List<Customer> getCustomersAsc(@PathVariable("lastName")String lastName) {
 
-        return service.getByAgeAsc(lastName);
+        return customerService.getByAgeAsc(lastName);
     }
 
     @LogThis
     @GetMapping(value = "/customer/{lastName}/desc" )
     public List<Customer> getCustomersDesc(@PathVariable("lastName")String lastName) {
 
-        return service.getByAgeDesc(lastName);
+        return customerService.getByAgeDesc(lastName);
     }
 
     @LogThis
     @GetMapping(value = "/group/{groupName}" )
     public List<Customer> getGroup(@PathVariable("groupName")String groupName) {
 
-        return service.getGroup(groupName);
+        return customerService.getGroup(groupName);
     }
 
     @Transactional
@@ -51,6 +51,7 @@ public class CustomerController {
     @GetMapping(value = "/customer/{lastName}/delete" )
     public void deleteCustomer(@PathVariable("lastName")String lastName) {
 
-        service.deleteByLastName(lastName);
+        customerService.deleteByLastName(lastName);
     }
+
 }

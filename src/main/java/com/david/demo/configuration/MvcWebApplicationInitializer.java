@@ -1,4 +1,4 @@
-package com.david.demo;
+package com.david.demo.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

@@ -1,6 +1,5 @@
 package com.david.demo.errorHandling;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
