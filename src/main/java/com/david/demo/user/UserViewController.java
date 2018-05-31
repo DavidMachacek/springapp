@@ -26,7 +26,7 @@ import com.david.demo.errorHandling.EmailExistsException;
 public class UserViewController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @Autowired
     Validator validator;
@@ -44,7 +44,7 @@ public class UserViewController {
         System.out.println(all.size());
         all.forEach(System.out::println);
         model.addAttribute("customerList", all);
-        return "customerList";
+        return "userList";
     }
 
     @GetMapping(value = "/user/test")

@@ -1,13 +1,8 @@
 package com.david.demo.errorHandling;
 
-public class EmailExistsException extends Exception {
+public class EmailExistsException extends RuntimeException {
 
-    String message;
-
-    public EmailExistsException(Throwable s, String message) {
-        super(s);
-        this.message = message;
-    }
+    private String message;
 
     public EmailExistsException(String message) {
         super(message);
