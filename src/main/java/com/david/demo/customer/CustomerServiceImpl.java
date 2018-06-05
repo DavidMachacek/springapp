@@ -23,7 +23,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public void setUp() {
-        CustomerGroup customerGroup = customerGroupRepository.save(new CustomerGroup("super"));
+        //CustomerGroup customerGroup = customerGroupRepository.save(new CustomerGroup("super"));
+        CustomerGroup customerGroup = new CustomerGroup("super");
         customerRepository.deleteAll();
         customerRepository.save(new Customer("Jack", "Bauer", 20, customerGroup.getId()));
         customerRepository.save(new Customer("Chloe", "O'Brian", 15, customerGroup.getId()));
