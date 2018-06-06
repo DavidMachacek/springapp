@@ -25,7 +25,4 @@ public class HazelcastConfiguration {
     public HazelcastInstance hazelcastInstance(Config hazelcastInstanceConfig) {
         return Hazelcast.newHazelcastInstance(hazelcastInstanceConfig);
     }
-
-
-
 }

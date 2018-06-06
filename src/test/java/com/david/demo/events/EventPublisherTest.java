@@ -12,21 +12,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.david.demo.PersistenceConfiguration;
-/*
+
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {
         EventConfiguration.class,
         PersistenceConfiguration.class
-})*/
+})
 public class EventPublisherTest {
-/*
-    EventRepository eventRepository;
-    EventPublisher eventPublisher;
+
+    @Autowired
+    private EventRepository eventRepository;
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     @Test
     public void publish() {
-        eventPublisher.publish("hello");
-        assertTrue(eventRepository.findAll().size()==0);
+        ApplicationEvent event = new ApplicationEvent("hello");
+        eventPublisher.publishEvent(event);
+        assertTrue(eventRepository.findAll().size()==1);
+        assertEquals(eventRepository.findAll().get(0).getMessage(), "hello");
     }
-*/
 }

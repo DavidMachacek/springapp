@@ -17,8 +17,7 @@ public class EventConfiguration {
     }
 
     @Bean
-
-    public EventPublisher eventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        return new EventPublisher(applicationEventPublisher);
+    public EventPublisher eventPublisher() {
+        return new EventPublisher();
     }
 }
