@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
+/**
+ * Spring data repository accessing Customer table - DAO
+ */
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     List<Customer> findByLastName(String lastName);

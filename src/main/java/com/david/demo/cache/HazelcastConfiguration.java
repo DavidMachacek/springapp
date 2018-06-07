@@ -10,6 +10,9 @@ import com.hazelcast.config.MapConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
+/**
+ * Configures hazelcast instance to provide cache
+ */
 @Configuration
 public class HazelcastConfiguration {
 

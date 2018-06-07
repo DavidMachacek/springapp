@@ -2,14 +2,18 @@ package com.david.demo.customer;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.demo.logs.LogThis;
 
+/**
+ * API controller
+ */
 @RequestMapping("/api")
 @RestController
 public class CustomerApiController {
@@ -48,7 +52,6 @@ public class CustomerApiController {
         return customerService.getGroup(groupName);
     }
 
-    @Transactional
     @LogThis
     @GetMapping(value = "/customer/{lastName}/delete" )
     public void deleteCustomer(@PathVariable("lastName")String lastName) {
@@ -56,4 +59,15 @@ public class CustomerApiController {
         customerService.deleteByLastName(lastName);
     }
 
+    @LogThis
+    @GetMapping(value = "/customers" )
+    public List<Customer> getAll() {
+
+        return customerService.getAll();
+    }
+
+    @PostMapping(value = "/customer")
+    public void createCustomer(@RequestBody CustomerTO customerTO) {
+        customerService.addNew(CustomerMapper.INSTANCE.customerTOToCustomer(customerTO));
+    }
 }

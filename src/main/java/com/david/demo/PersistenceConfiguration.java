@@ -21,6 +21,9 @@ import com.david.demo.events.EventRepository;
 import com.david.demo.user.RoleRepository;
 import com.david.demo.user.UserRepository;
 
+/**
+ * Configuration for in-memory H2 database
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = {

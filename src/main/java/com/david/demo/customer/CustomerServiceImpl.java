@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.david.demo.errorHandling.NotFoundException;
 import com.david.demo.logs.LogThis;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -16,14 +17,13 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerGroupRepository customerGroupRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerGroupRepository customerGroupRepository) {
+    CustomerServiceImpl(CustomerRepository customerRepository, CustomerGroupRepository customerGroupRepository) {
         this.customerRepository = customerRepository;
         this.customerGroupRepository = customerGroupRepository;
-        setUp();
+        createTestData();
     }
 
-    public void setUp() {
-        //CustomerGroup customerGroup = customerGroupRepository.save(new CustomerGroup("super"));
+    private void createTestData() {
         CustomerGroup customerGroup = new CustomerGroup("super");
         customerRepository.deleteAll();
         customerRepository.save(new Customer("Jack", "Bauer", 20, customerGroup.getId()));
@@ -33,9 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.save(new Customer("Michelle", "Dessler", 16, customerGroup.getId()));
         customerRepository.save(new Customer("Peter", "Bauer", 34, customerGroup.getId()));
 
-        // fetch all customers
-        log.info("Customers found with findAll():");
-        log.info("-------------------------------");
         for (Customer customer : customerRepository.findAll()) {
             log.info(customer.toString());
         }
@@ -46,6 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getByName(String lastName) {
         List<Customer> customers = customerRepository.findByLastName(lastName);
         customers.forEach(customer -> log.debug("action: {}, found - id: {}, name: {},  ", "getByName", customer.getId(), customer.getFirstName()));
+        if (customers.isEmpty()) {
+            throw new NotFoundException("Customer " + lastName);
+        }
         return customers;
     }
 
@@ -53,6 +53,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Cacheable(value = "customer-cache", key = "#lastName")
     public List<Customer> getByAgeDesc(String lastName) {
         List<Customer> customers = customerRepository.findByLastNameOrderByAgeDesc(lastName);
+        if (customers.isEmpty()) {
+            throw new NotFoundException("Customer " + lastName);
+        }
         customers.forEach(customer -> log.debug("action: {}, found - id: {}, name: {},  ", "getByAgeDesc", customer.getId(), customer.getFirstName()));
         return customers;
     }
@@ -61,6 +64,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Cacheable(value = "customer-cache", key = "#lastName")
     public List<Customer> getByAgeAsc(String lastName) {
         List<Customer> customers = customerRepository.findByLastNameOrderByAgeAsc(lastName);
+        if (customers.isEmpty()) {
+            throw new NotFoundException("Customer " + lastName);
+        }
         customers.forEach(customer -> log.debug("action: {}, found - id: {}, name: {},  ", "getByAgeAsc", customer.getId(), customer.getFirstName()));
         return customers;
     }
@@ -70,12 +76,13 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getGroup(String groupName) {
         CustomerGroup customerGroup = customerGroupRepository.findCustomerGroupByGroupName(groupName);
         List<Customer> customers = customerRepository.findByGroupId(customerGroup.getId());
+        if (customers.isEmpty()) {
+            throw new NotFoundException("Customer with group " + groupName);
+        }
         customers.forEach(customer -> log.debug("action: {}, found - id: {}, name: {},  ", "getGroup", customer.getId(), customer.getFirstName()));
         return customers;
     }
 
-    //@LogThis
-    //@Cacheable(value = "customer-cache")
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }

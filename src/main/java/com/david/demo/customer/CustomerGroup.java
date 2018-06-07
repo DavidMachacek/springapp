@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * JPA Entity object
+ */
 @Entity
 public class CustomerGroup  implements Serializable {
 
