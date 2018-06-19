@@ -17,7 +17,7 @@ Test project for Java 8 with Maven secured by OAuth2 with basic UI provided by J
 ### API blueprint
 Exposed at /v2/api-docs
 
-### Non-Secured endpoints
+### Non-Secured endpoints (currently turned off, fix for auth server is WIP)
 - /
 - /customers
 - /v2/api-docs
