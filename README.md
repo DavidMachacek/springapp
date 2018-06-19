@@ -2,16 +2,17 @@
 Test project for Java 8 with Maven secured by OAuth2 with basic UI provided by JSP (front-end is not in the scope of this project).
 
 ### Technologies:
-- Spring MVC 
+- Spring MVC (exposes REST api)
 - Spring Security (OAuth2 tokens)
-- Spring Data
-- Spring Boot
+- Spring Data (set for H2)
+- Spring Boot (contains its own web container)
 - Spring application events
 - H2 (custom configured in-memory database)
 - Hazelcast (to enable cache)
 - JSP & Thymeleaf (basic UI)
-- MapStruct
-- Swagger
+- MapStruct (mappign TO and entities)
+- Swagger (app exposes its own API blueprint)
+- Docker (contains Dockerfile to deploy in Java-based Docker container)
 - and others..
 
 ### API blueprint
