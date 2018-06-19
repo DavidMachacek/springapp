@@ -37,5 +37,11 @@ Authorization server grands tokens at /oauth/token
 
 cUrl command
 ```
-curl -i -X POST -H "Authorization: Basic Q2xpZW50SWQ6c2VjcmV0" <host>/oauth/token?grant_type=password&username=david&password=david
+curl -X POST \
+  '<host>/oauth/token?grant_type=password&username=david&password=david' \
+  -H 'authorization: Basic Q2xpZW50SWQ6c2VjcmV0'
+```
+obtained token then send as param, i.e.:
+```
+<host>/customers?access_token=cfed3699-d095-4980-baa5-8e33bf7c201d
 ```
