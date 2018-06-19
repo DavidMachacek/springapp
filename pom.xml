@@ -23,6 +23,7 @@
         <version.javax.jsp>2.3.2-b01</version.javax.jsp>
         <version.javax.jstl>1.2</version.javax.jstl>
         <version.log4j>1.2.17</version.log4j>
+        <version.mapstruct>1.2.0.Final</version.mapstruct>
     </properties>
 
     <dependencies>
@@ -151,14 +152,13 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.2.0.Final</version>
-            <scope>provided</scope>
+            <version>${version.mapstruct}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <version>1.2.0.Final</version>
+            <version>${version.mapstruct}</version>
         </dependency>
     </dependencies>
     <repositories>

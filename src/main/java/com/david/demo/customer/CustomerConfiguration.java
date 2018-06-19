@@ -15,4 +15,8 @@ public class CustomerConfiguration {
         return new CustomerServiceImpl(customerRepository, customerGroupRepository);
     }
 
+    @Bean
+    public CustomerApiController customerApiController(CustomerService customerService) {
+        return new CustomerApiController(customerService);
+    }
 }

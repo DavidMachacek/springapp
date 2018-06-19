@@ -1,0 +1,41 @@
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+table {
+
+    border-collapse: collapse;
+    width: 70%;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr.even {background-color: #f2f2f2}
+tr.odd {background-color: #ffffff}
+
+tr:hover {background-color: #00A7C8;}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #01568F;
+    color: white;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+inputField {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 32px;
+    margin: 4px 2px;
+}
+inputField:focus {
+
+}

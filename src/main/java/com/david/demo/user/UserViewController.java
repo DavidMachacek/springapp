@@ -3,10 +3,7 @@ package com.david.demo.user;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +57,6 @@ public class UserViewController {
             @ModelAttribute("user") UserDTO accountDto,
             BindingResult result,
             ModelMap modelMap) throws EmailExistsException {
-
-        Set<ConstraintViolation<UserDTO>> validationResult = validator.validate(accountDto);
-        if (!validationResult.isEmpty()) {
-            throw new ConstraintViolationException(validationResult);
-        }
-
         User registered = userService.registerNewUserAccount(accountDto);
         if (registered == null) {
             result.rejectValue("email", "message.regError");

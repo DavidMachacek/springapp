@@ -19,7 +19,7 @@ import com.david.demo.user.UserRepository;
 @EnableResourceServer
 @Configuration
 @Import(PasswordEncoderConfiguration.class)
-@Order(1) // add to override default OAuth2 intercepter
+//@Order(1) //TODO add to override default OAuth2 intercepter, but then you are refused to login to any page!
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
     @Override

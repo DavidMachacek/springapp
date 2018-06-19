@@ -8,24 +8,23 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Allows intercepting chosen exception and return transfer object with details instead
  */
-@RestControllerAdvice
+@ControllerAdvice
 public class ExceptionEndpointAdvice {
 
-
+    // TODO finish expcetion catching
     private static final Logger logger = LoggerFactory.getLogger(ExceptionEndpointAdvice.class);
     private final Converter<ConstraintViolation<?>, ErrorTO> converter;
 
@@ -33,10 +32,10 @@ public class ExceptionEndpointAdvice {
         this.converter = converter;
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
+    @ExceptionHandler(ConstraintException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public ErrorListTO handleAnyException(ConstraintViolationException exceptions) {
-        logger.debug("ConstraintViolationException caught");
+    public ErrorListTO handleAnyException(ConstraintException exceptions) {
+        logger.debug("ConstraintException caught");
         return new ErrorListTO(exceptions.getConstraintViolations().stream().map(converter::convert).collect(Collectors.toList()));
     }
 

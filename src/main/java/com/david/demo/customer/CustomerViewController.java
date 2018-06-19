@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.david.demo.errorHandling.ConstraintException;
 
 /**
  *
@@ -61,7 +62,7 @@ public class CustomerViewController {
 
         Set<ConstraintViolation<Customer>> validationResult = validator.validate(customer);
         if (!validationResult.isEmpty()) {
-            throw new ConstraintViolationException(validationResult);
+            throw new ConstraintException(validationResult);
         }
         Customer registered = customerService.addNew(customer);
         if (registered == null) {

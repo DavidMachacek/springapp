@@ -58,9 +58,5 @@ public abstract class AbstractControllerTest {
     })
     @EnableWebMvc
     public static class Config {
-        @Bean
-        public CustomerApiController customerApiController(CustomerService customerService) {
-            return new CustomerApiController(customerService);
-        }
     }
 }
