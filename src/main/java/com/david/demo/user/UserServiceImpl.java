@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.mapstruct.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final Validator validator;
     private final UserMapper mapper = UserMapper.INSTANCE;
+    private UserDTO loggedUser;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, Validator validator) {
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, Validator validator, @Qualifier("loggedUser") UserDTO loggedUser) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.validator = validator;
+        this.loggedUser = loggedUser;
         setUp();
     }
 
@@ -84,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAll() {
-
+        System.out.println("JAKO PRIHLASENY USER JE VEDEN " + loggedUser);
         List<UserEntity> userRepositoryAll = userRepository.findAll();
         return userRepositoryAll.stream().map(userEntity -> {
             UserDTO userDTO = mapper.userEntityToUserDTO(userEntity);
@@ -112,5 +115,10 @@ public class UserServiceImpl implements UserService {
             return UserMapper.INSTANCE.userEntityToUserDTO(byEmail);
         }
         throw new UsernameNotFoundException("user not found");
+    }
+
+    @Override
+    public UserDTO getCurrentLoggedUser() {
+        return loggedUser;
     }
 }

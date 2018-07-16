@@ -2,6 +2,7 @@ package com.david.demo.social;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,12 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    public LoginController(@Qualifier("loggedUser") UserDTO loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    private UserDTO loggedUser;
 
     @RequestMapping(value = "/facebook", method = RequestMethod.GET)
     public String loginToFacebook(Model model) {
@@ -61,13 +68,26 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginUserAccount(Model model,
                                    @ModelAttribute("user") UserDTO userDTO, BindingResult result) throws EmailExistsException {
-        UserDTO loggedAs = userService.loginUserAccount(userDTO.getUsername(), userDTO.getPassword());
-        if (loggedAs == null) {
+        setAsLoggedIn(userService.loginUserAccount(userDTO.getUsername(), userDTO.getPassword()));
+        if (loggedUser == null) {
             result.rejectValue("email", "message.regError");
             System.out.println("UZIVATE NEPIHLAAASEN");
         }
-        System.out.println(loggedAs);
-        model.addAttribute("user", loggedAs);
+        System.out.println("Prihlaseni uspesne jako: " + loggedUser);
+        model.addAttribute("user", loggedUser);
         return "hello";
+    }
+
+    private void setAsLoggedIn(UserDTO newLoggedUser) {
+        loggedUser.setFirstName(newLoggedUser.getFirstName());
+        loggedUser.setLastName(newLoggedUser.getLastName());
+        loggedUser.setEmail(newLoggedUser.getEmail());
+        loggedUser.setGender(newLoggedUser.getGender());
+        loggedUser.setUsername(newLoggedUser.getUsername());
+        loggedUser.setUserOrigin(newLoggedUser.getUserOrigin());
+        loggedUser.setAuthorities(newLoggedUser.getAuthorities());
+        loggedUser.setPassword(newLoggedUser.getPassword());
+        loggedUser.setRole(newLoggedUser.getRole());
+        loggedUser.setId(newLoggedUser.getId());
     }
 }

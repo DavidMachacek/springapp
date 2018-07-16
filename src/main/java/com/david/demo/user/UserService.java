@@ -14,4 +14,6 @@ public interface UserService {
     UserSocialDetails userDtoToUserSocial(UserDTO accountDto);
 
     UserDTO loginUserAccount(String username, String password);
+
+    UserDTO getCurrentLoggedUser();
 }

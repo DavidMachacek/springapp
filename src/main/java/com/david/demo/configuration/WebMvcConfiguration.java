@@ -99,5 +99,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/image/**")
                 .addResourceLocations("/WEB-INF/image/");
+        registry
+                .addResourceHandler("/views/**")
+                .addResourceLocations("/WEB-INF/views/");
     }
 }

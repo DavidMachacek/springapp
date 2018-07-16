@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+        var includes = $('[data-include]');
+        jQuery.each(includes, function(){
+            var file = 'views/include/' + $(this).data('include') + '.html';
+            $(this).load(file);
+        });
+    });
+    </script>
 </head>
 <body>
 
@@ -36,5 +45,7 @@
         <td th:text="${user.email}"/></td>
     </tr>
 </table>
+
+<div data-include="header"></div>
 </body>
 </html>

@@ -55,8 +55,10 @@ public class UserViewController {
     @GetMapping(value = "/users")
     public String showUsersList(Model model) {
         List<UserDTO> all = userService.getAll();
-        System.out.println(all.size());
+        System.out.println("Pocet nalezenych useru + " + all.size());
+        System.out.println("-- vypisuji usery ---");
         all.forEach(System.out::println);
+        System.out.println("-----");
         model.addAttribute("userList", all);
         return "userList";
     }

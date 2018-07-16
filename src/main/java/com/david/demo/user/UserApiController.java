@@ -1,8 +1,6 @@
 package com.david.demo.user;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +26,11 @@ public class UserApiController {
     @PostMapping("/user")
     public void getUsers(@RequestBody UserDTO accountDto) {
         userService.registerNewUserAccount(accountDto);
+    }
+
+
+    @GetMapping(value = {"/currentuser"})
+    public UserDTO getCurrentuser() {
+        return userService.getCurrentLoggedUser();
     }
 }

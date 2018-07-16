@@ -59,7 +59,7 @@ public class DBAuthenticationProvider implements AuthenticationProvider {
     }
 
     private boolean match(UserEntity userEntity, String username, String password) {
-        System.out.println(userEntity.getUsername() + " " + username + " " + userEntity.getPassword() + " " + password);
+        System.out.println("Matching users ... " + userEntity.getUsername() + " " + username + " " + userEntity.getPassword() + " " + password);
         logger.debug("Matching userEntity of name {} - {} and password {} - {}", userEntity.getUsername(), username, userEntity.getPassword(), password);
         return userEntity.getUsername().equals(username) && passwordEncoder.matches(password, userEntity.getPassword());
     }
