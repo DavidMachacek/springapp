@@ -5,19 +5,25 @@
     <title>Customer list</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <a href="?lang=en">English</a> |
 <a href="?lang=cz">Česky</a>
 
-<h1>Customers list</h1>
+<h1>Customers</h1>
 <div th:if="${#lists.isEmpty(customerList)}">
     No customers to display
 </div>
 
-<table th:if="${not #lists.isEmpty(customerList)}">
+<div
+<table th:if="${not #lists.isEmpty(customerList)}"  class=".table-striped .table-hover">
     <tr>
         <td/>ID</td>
         <td/>FIRSTNAME</td>
@@ -25,9 +31,10 @@
         <td/>EMAIL</td>
     </tr>
     <tr th:each="customer : ${customerList}">
-        <td th:text="${customer.id}"/></td>
-        <td th:text="${customer.firstName}"/></td>
-        <td th:text="${customer.lastName}"/></td>
+        <td th:text="${customer.id}"/>
+        <td th:text="${customer.firstName}"/>
+        <td th:text="${customer.lastName}"/>
+        <td th:text="${customer.email}"/>
     </tr>
 </table>
 

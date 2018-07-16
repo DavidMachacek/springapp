@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -30,7 +31,8 @@ import com.david.demo.user.UserRepository;
         EventRepository.class,
         CustomerRepository.class,
         UserRepository.class,
-        RoleRepository.class
+        RoleRepository.class,
+        UsersConnectionRepository.class
 })
 public class PersistenceConfiguration {
 

@@ -3,7 +3,7 @@
     <title>Registration</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
 <body>
 <h1 th:text="#{label.form.title}">form</h1>
@@ -41,6 +41,6 @@
     <button type="submit" th:text="#{label.form.submit}">submit</button>
 </form>
 
-<a th:href="@{/login.html}" th:text="#{label.form.loginLink}">login</a>
+<a th:href="@{/WEB-INF/views/login.html}" th:text="#{label.form.loginLink}">login</a>
 </body>
 </html>

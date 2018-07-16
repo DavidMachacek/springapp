@@ -23,6 +23,7 @@ import com.david.demo.customer.CustomerRepository;
 import com.david.demo.customer.CustomerService;
 import com.david.demo.errorHandling.ExceptionConfiguration;
 import com.david.demo.security.AuthorizationGlobalConfig;
+import com.david.demo.social.SocialContext;
 import com.david.demo.user.UserConfiguration;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +55,8 @@ public abstract class AbstractControllerTest {
             ExceptionConfiguration.class,
             UserConfiguration.class,
             PersistenceConfiguration.class,
-            AuthorizationGlobalConfig.class
+            AuthorizationGlobalConfig.class,
+            SocialContext.class
     })
     @EnableWebMvc
     public static class Config {

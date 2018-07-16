@@ -2,6 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Hello</title>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h3>Connected to application</h3>
@@ -9,15 +14,40 @@
 <p>
     You are now connected to your account.
 </p>
-<div>FirstName: </div>
-<div th:text="${user.firstName}"></div>
-<div>lastName: </div>
-<div th:text="${user.lastName}"></div>
-<div>email: </div>
-<div th:text="${user.email}"></div>
-<div>password: </div>
-<div th:text="${user.password}"></div>
-<div>userOrigin: </div>
-<div th:text="${user.userOrigin}"></div>
+
+<form th:action="@{/login}" method="post">
+    <div class="form-group">
+        <label class="sr-only">ID</label>
+        <input class="form-control" type="text" name="id" th:value="${user.id}" readonly/>
+        <small id="idHelp" class="form-text text-muted">Not shown if logged in using 3td party provider (i.e.
+            Facebook).
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">firstName</label>
+        <input class="form-control" type="text" name="firstName" th:value="${user.firstName}" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">lastName</label>
+        <input class="form-control" type="text" name="lastName" th:value="${user.lastName}" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">Email</label>
+        <input class="form-control" type="text" name="username" th:value="${user.email}" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">Password</label>
+        <input class="form-control" type="password" name="password" th:value="${user.password}" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label class="sr-only">User Origin</label>
+        <input class="form-control" type="text" name="userOrigin" th:value="${user.userOrigin}" readonly/>
+    </div>
+</form>
 </body>
 </html>

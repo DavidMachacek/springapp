@@ -1,50 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>login table</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/asdbootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"></link>
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div align="form-signin">
+    <!-- Logo -->
+    <img class="mb-4" src="image/spring.png" alt="This app was built using Spring.. Hello!" width="72" height="72">
+
+    <!-- Login form -->
+    <form th:action="@{/login}" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+        <label class="sr-only">Username</label>
+        <input class="form-control" type="text" name="username" placeholder="Email address" required autofocus/>
+
+        <label class="sr-only">Password</label>
+        <input class="form-control" type="password" name="password" placeholder="Password" required/>
+
+        <button type="submit" class="btn btn-primary min-length-btn"><span class="fa fa-expeditedssl">  Local</span>
+        </button>
+    </form>
+
+    <!-- Social Sign In Buttons -->
+    <form action="/connect/facebook" method="POST">
+        <input type="hidden" name="scope" value="public_profile,email,user_posts,user_gender"/>
+        <button type="submit" class="btn btn-primary min-length-btn"><span class="fa fa-facebook">  Facebook</span>
+        </button>
+    </form>
+
+    <!-- Copyright -->
+    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-
-<!-- Login form -->
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-
-<!-- Social Sign In Buttons -->
-<form action="/connect/facebook" method="POST" style="display: inline">
-    <input type="hidden" name="scope" value="public_profile,email,user_posts,user_gender"/>
-    <button type="submit" class="btn btn-primary"><span class="fa fa-facebook">Facebook</span>
-    </button>
-</form>
-
-<sec:authorize access="isAnonymous()">
-    <p>
-        access="isAnonymous()"
-    </p>
-</sec:authorize>
-
-<sec:authorize access="isAuthenticated()">
-    <p>
-        access="isAuthenticated()"
-    </p>
-</sec:authorize>
-
 </body>
 </html>

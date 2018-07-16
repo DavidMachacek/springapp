@@ -26,7 +26,6 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
  * Configures thymeleaf and localized message sources
  */
 @Configuration
-@EnableWebMvc
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Autowired
@@ -94,5 +93,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/");
+        registry
+                .addResourceHandler("/css/**")
+                .addResourceLocations("/WEB-INF/css/");
+        registry
+                .addResourceHandler("/image/**")
+                .addResourceLocations("/WEB-INF/image/");
     }
 }
