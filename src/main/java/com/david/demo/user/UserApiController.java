@@ -1,5 +1,6 @@
 package com.david.demo.user;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,12 +22,7 @@ public class UserApiController {
 
     @GetMapping("/users")
     public List<UserDTO> getUsers() {
-        return userService.getAll().stream().map(user -> {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setUsername(user.getUsername());
-            userDTO.setPassword(user.getPassword());
-            return userDTO;
-        }).collect(Collectors.toList());
+        return userService.getAll();
     }
 
     @PostMapping("/user")

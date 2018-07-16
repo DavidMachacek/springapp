@@ -12,8 +12,8 @@ public class EventConfiguration {
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Bean
-    public EventListener eventListener(EventRepository eventRepository) {
-        return new EventListener(eventRepository);
+    public ApplicationEventListener eventListener(EventRepository eventRepository) {
+        return new ApplicationEventListener(eventRepository);
     }
 
     @Bean

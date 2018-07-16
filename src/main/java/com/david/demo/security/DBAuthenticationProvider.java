@@ -16,7 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.david.demo.user.Role;
-import com.david.demo.user.User;
+import com.david.demo.user.UserEntity;
 import com.david.demo.user.UserRepository;
 
 public class DBAuthenticationProvider implements AuthenticationProvider {
@@ -41,7 +41,7 @@ public class DBAuthenticationProvider implements AuthenticationProvider {
         }
         String password = credentials.toString();
 
-        Optional<User> userOptional = userRepository.findAll().stream()
+        Optional<UserEntity> userOptional = userRepository.findAll().stream()
                 .filter(u -> match(u, username, password))
                 .findFirst();
 
@@ -58,10 +58,10 @@ public class DBAuthenticationProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-    private boolean match(User user, String username, String password) {
-        System.out.println(user.getUsername() + " " + username + " " + user.getPassword() + " " + password);
-        logger.debug("Matching user of name {} - {} and password {} - {}", user.getUsername(), username, user.getPassword(), password);
-        return user.getUsername().equals(username) && passwordEncoder.matches(password, user.getPassword());
+    private boolean match(UserEntity userEntity, String username, String password) {
+        System.out.println(userEntity.getUsername() + " " + username + " " + userEntity.getPassword() + " " + password);
+        logger.debug("Matching userEntity of name {} - {} and password {} - {}", userEntity.getUsername(), username, userEntity.getPassword(), password);
+        return userEntity.getUsername().equals(username) && passwordEncoder.matches(password, userEntity.getPassword());
     }
 
 

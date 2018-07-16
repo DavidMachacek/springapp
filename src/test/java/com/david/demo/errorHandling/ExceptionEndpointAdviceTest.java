@@ -2,6 +2,8 @@ package com.david.demo.errorHandling;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
+
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,7 +23,6 @@ public class ExceptionEndpointAdviceTest extends AbstractControllerTest {
         UserDTO user = new UserDTO();
         user.setFirstName("FirstName");
         user.setLastName("LastName");
-        user.setPassword("password");
         user.setMatchingPassword("password");
         user.setEmail("emailWrongFormat");
 

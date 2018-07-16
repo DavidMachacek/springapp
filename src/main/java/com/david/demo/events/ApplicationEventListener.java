@@ -2,22 +2,21 @@ package com.david.demo.events;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EventListener {
+public class ApplicationEventListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(EventListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationEventListener.class);
 
     private EventRepository eventRepository;
 
-    public EventListener(EventRepository eventRepository) {
+    public ApplicationEventListener(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
-    @org.springframework.context.event.EventListener
+    @EventListener
     public void onApplicationEvent(ApplicationEvent event) {
         EventEntity eventEntity = new EventEntity();
         eventEntity.setMessage(event.getMessage());

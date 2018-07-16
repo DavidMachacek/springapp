@@ -5,12 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.ComponentScan;
-
-import com.david.demo.customer.CustomerApiController;
-import com.david.demo.customer.CustomerViewController;
-import com.david.demo.user.UserApiController;
-import com.david.demo.user.UserViewController;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

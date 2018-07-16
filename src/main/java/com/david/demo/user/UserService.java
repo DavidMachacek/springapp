@@ -8,7 +8,10 @@ import com.david.demo.errorHandling.EmailExistsException;
 
 @Service
 public interface UserService {
-    User registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
-    List<User> getAll();
+    UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
+    List<UserDTO> getAll();
 
+    UserSocialDetails userDtoToUserSocial(UserDTO accountDto);
+
+    UserDTO loginUserAccount(String username, String password);
 }

@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.client.RestTemplate;
 
 import com.david.demo.security.PasswordEncoderConfiguration;
 
@@ -28,4 +31,10 @@ public class UserConfiguration {
     public javax.validation.Validator validator() {
         return new LocalValidatorFactoryBean();
     }
+
+    @Bean
+    public Facebook facebook() {
+        return new FacebookTemplate("EAAIfWkDAs9ABAMyASVk2Q0utM6zQXxuBmy1OXQcwrvnnlNSnn9wsZBudo7daDUbiNvCXpXDPy7SJxVZBI4yMvlaQ9DtlgFnnEfT5Lk1kNmbpv0zDePQ3N8ZAky3FozaO7CxW9ZC4HZBNFKRUcV1vksVlKyJrdKX0ZD");
+    }
+
 }

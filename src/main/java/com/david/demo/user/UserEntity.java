@@ -3,15 +3,20 @@ package com.david.demo.user;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.google.common.base.Objects;
+
 @Entity
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -30,9 +35,12 @@ public class User {
 
     private String password;
 
-    public User() {}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "userOrigin", length = 20)
+    private UserOrigin userOrigin;
+    public UserEntity() {}
 
-    public User(String firstName, String lastName, String email, List<Role> role, String username, String password) {
+    public UserEntity(String firstName, String lastName, String email, List<Role> role, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -139,15 +147,31 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("User{");
-        sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append('}');
-        return sb.toString();
+    /**
+     * Property getter
+     */
+    public UserOrigin getUserOrigin() {
+        return userOrigin;
     }
 
+    /**
+     * Property setter
+     */
+    public void setUserOrigin(UserOrigin userOrigin) {
+        this.userOrigin = userOrigin;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("firstName", firstName)
+                .add("lastName", lastName)
+                .add("email", email)
+                .add("role", role)
+                .add("username", username)
+                .add("password", password)
+                .add("userOrigin", userOrigin)
+                .toString();
+    }
 }

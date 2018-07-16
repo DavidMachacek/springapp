@@ -5,11 +5,8 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.david.demo.user.User;
+import com.david.demo.user.UserEntity;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
@@ -25,16 +22,16 @@ public class DemoApplicationTests {
 		System.out.println(poles.toString());
 		int i = pole.hashCode();
 
-		User user = new User();
-		user.setFirstName("david");
-		User user1 = user;
-		System.out.println(user.getFirstName());
-		System.out.println(user1.getFirstName());
+		UserEntity userEntity = new UserEntity();
+		userEntity.setFirstName("david");
+		UserEntity userEntity1 = userEntity;
+		System.out.println(userEntity.getFirstName());
+		System.out.println(userEntity1.getFirstName());
 
-		user.setFirstName("adam");
+		userEntity.setFirstName("adam");
 
-		System.out.println(user.getFirstName());
-		System.out.println(user1.getFirstName());
+		System.out.println(userEntity.getFirstName());
+		System.out.println(userEntity1.getFirstName());
 
 		Map mp = new Hashtable();
 

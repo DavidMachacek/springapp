@@ -3,12 +3,16 @@ package com.david.demo.user;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import org.mapstruct.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,15 +44,17 @@ public class UserServiceImpl implements UserService {
         UserDTO user = new UserDTO();
         user.setUsername("david");
         user.setPassword("david");
+        user.setMatchingPassword("david");
         user.setFirstName("david");
         user.setLastName("david");
         user.setEmail("david@david.dd");
+        user.setUserOrigin(UserOrigin.CUSTOM);
         user.setRole(Collections.singletonList(role));
         registerNewUserAccount(user);
     }
 
     @Override
-    public User registerNewUserAccount(UserDTO accountDto) throws EmailExistsException, ConstraintException {
+    public UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException, ConstraintException {
 
         Set<ConstraintViolation<UserDTO>> validationResult = validator.validate(accountDto);
         if (!validationResult.isEmpty()) {
@@ -60,24 +66,51 @@ public class UserServiceImpl implements UserService {
                     "There is an account with that email adress: "
                             + accountDto.getEmail());
         }
-        User newUser = UserMapper.INSTANCE.userDTOToUser(accountDto);
-        newUser.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        User savedUser = userRepository.save(newUser);
-        User byEmail = userRepository.findByEmail(savedUser.getEmail());
-        logger.debug("New User registered as" + byEmail);
-        return savedUser;
+        UserEntity newUserEntity = UserMapper.INSTANCE.userDTOToUser(accountDto);
+        newUserEntity.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+        UserEntity savedUserEntity = userRepository.save(newUserEntity);
+        UserEntity byEmail = userRepository.findByEmail(savedUserEntity.getEmail());
+        logger.debug("New UserEntity registered as" + byEmail);
+        return UserMapper.INSTANCE.userEntityToUserDTO(savedUserEntity);
     }
 
     private boolean emailExist(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        if (userEntity != null) {
             return true;
         }
         return false;
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDTO> getAll() {
+
+        List<UserEntity> userRepositoryAll = userRepository.findAll();
+        return userRepositoryAll.stream().map(userEntity -> {
+            UserDTO userDTO = mapper.userEntityToUserDTO(userEntity);
+            return userDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserSocialDetails userDtoToUserSocial(UserDTO userDTO) {
+        return UserSocialDetails.getBuilder()
+                .id(userDTO.getId())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .username(userDTO.getUsername())
+                .password(userDTO.getPassword())
+                .role(userDTO.getRole())
+                .userOrigin(userDTO.getUserOrigin())
+                .build();
+    }
+
+    @Override
+    public UserDTO loginUserAccount(String username, String password) {
+        UserEntity byEmail = userRepository.findByUsername(username);
+        if (username.equals(byEmail.getUsername()) && passwordEncoder.matches(password, byEmail.getPassword())) {
+            return UserMapper.INSTANCE.userEntityToUserDTO(byEmail);
+        }
+        throw new UsernameNotFoundException("user not found");
     }
 }

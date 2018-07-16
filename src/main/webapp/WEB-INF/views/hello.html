@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello</title>
+</head>
+<body>
+<h3>Connected to application</h3>
+
+<p>
+    You are now connected to your account.
+</p>
+<div>FirstName: </div>
+<div th:text="${user.firstName}"></div>
+<div>lastName: </div>
+<div th:text="${user.lastName}"></div>
+<div>email: </div>
+<div th:text="${user.email}"></div>
+<div>password: </div>
+<div th:text="${user.password}"></div>
+<div>userOrigin: </div>
+<div th:text="${user.userOrigin}"></div>
+</body>
+</html>

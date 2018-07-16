@@ -6,19 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-
 </head>
 <body>
 
 <a href="?lang=en">English</a> |
 <a href="?lang=cz">Česky</a>
 
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
 <h1>Customers list</h1>
 <div th:if="${#lists.isEmpty(customerList)}">
     No customers to display

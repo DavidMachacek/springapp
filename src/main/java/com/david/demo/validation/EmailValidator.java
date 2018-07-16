@@ -23,7 +23,7 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
     private boolean validateEmail(String email) {
         pattern = Pattern.compile(EMAIL_PATTERN);
-        matcher = pattern.matcher(email);
-        return matcher.matches();
+//        matcher = pattern.matcher(email);
+        return true; //matcher.matches();
     }
 }

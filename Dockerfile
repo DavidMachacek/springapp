@@ -14,4 +14,4 @@ HEALTHCHECK --interval=30s \
             --start-period=20s \
              CMD ["bash", "-c", "curl -i -s http://127.0.0.1:8080/actuator/health | grep -E 'HTTP/1.1 (200|202)'"]
 
-CMD ["java -Dfile.encoding=UTF-8 -jar /app.jar"]
+CMD ["bash", "-c", "java -jar /app.jar"]

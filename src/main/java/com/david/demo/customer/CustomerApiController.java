@@ -2,6 +2,7 @@ package com.david.demo.customer;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.david.demo.logs.LogThis;
  */
 @RequestMapping("/api")
 @RestController
+@CrossOrigin // for test purposes allow FE deployed on localhost
 public class CustomerApiController {
 
     private final CustomerService customerService;
